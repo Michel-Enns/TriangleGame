@@ -39,7 +39,6 @@ class GameDot extends Circle{
 			GameRoot gr = (GameRoot) getParent();
 			gr.startDrawing(this);
 		});
-		
 	}
 	
 	Point getPoint() {

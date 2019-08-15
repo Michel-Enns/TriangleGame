@@ -17,8 +17,8 @@ public class GameLogic {
 			playerLines.add(new HashSet<Segment>());
 		}
 	}
-	// TODO change makeLine so that it checks for a triangle every time it adds a segment to the set
-	// it returns the Polygon that checkForTriangel returns
+
+	// Returns the Polygon that checkForTriangel returns
 	 Polygon makeLine (Segment newLine, int currentPlayer){
 		Set<Segment> newSegments = new HashSet<Segment>();
 		newSegments.add(newLine);

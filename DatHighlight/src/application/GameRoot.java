@@ -63,12 +63,10 @@ public class GameRoot extends BorderPane {
 
 	public GameRoot(Node center) {
 		super(center);
-		// TODO Auto-generated constructor stub
 	}
 
 	public GameRoot(Node center, Node top, Node right, Node bottom, Node left) {
 		super(center, top, right, bottom, left);
-		// TODO Auto-generated constructor stub
 	}
 
 	void startDrawing(GameDot startDot) {

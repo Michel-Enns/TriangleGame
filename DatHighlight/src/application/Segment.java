@@ -35,12 +35,8 @@ public class Segment {
 		if (p.equals(p1)||p.equals(p2)) {
 			return true;
 		}
-		// Now check to see that the test point's x and y values are between
-		// the x and y values of the line segment.
-//		if (((p.x > p1.x && p.x < p2.x)||(p.x < p1.x && p.x > p2.x))&&
-//				((p.y > p1.y && p.y < p2.y)||(p.y < p1.y && p.y > p2.y))) 
 		
-		// First check the special case where the segment is vertical.
+		// Check the special case where the segment is vertical.
 		if(Math.abs(p1.x - p2.x) < THRESHOLD && Math.abs(p1.x -  p.x) < THRESHOLD){
 			return true;
 		}
