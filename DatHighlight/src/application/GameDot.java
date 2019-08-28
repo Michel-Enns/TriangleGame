@@ -7,7 +7,7 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 
 class GameDot extends Circle{
-	static double radius = 10;
+	static double radius = 15;
 	static Color baseColour = Color.DARKGRAY;
 	static Color highlightColour = baseColour;
 	double x, y;

@@ -1,6 +1,8 @@
 package application;
 
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -15,11 +17,13 @@ public class GameRoot extends BorderPane {
 	GameDot startDot;
 	Line playerLine = new Line(0, 0, 0, 0);
 	int playerCount;
-	int currentPlayer = 1;
-	Color [] playerColour = {Color.RED, Color.BLUE, Color.GREEN, Color.DEEPPINK, Color.DARKVIOLET, Color.SANDYBROWN};
+	int currentPlayer = 0;
+	Color [] playerColour = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.FUCHSIA, Color.ORANGE};
+	String [] colourName = {"Red", "Blue", "Green", "Yellow", "Fuchia", "Orange"};
 	Polygon triangle;
 	
 	public GameRoot(int playerCount) {
+		playerLine.setStrokeWidth(5);
 		this.playerCount = playerCount;
 		getChildren().add(playerLine);
 		GameLogic gameLogic = new GameLogic(playerCount);
@@ -40,13 +44,16 @@ public class GameRoot extends BorderPane {
 				startDot.unhighlight();
 				if (gameLogic.lineAvailable(playerLine)) {
 					triangle = gameLogic.addPlayerLine(currentPlayer, playerLine);
-					getChildren().add(copyLine(playerLine));
+					Line playedLine = copyLine(playerLine);
+					getChildren().add(playedLine);
+					playedLine.toBack();
 
 					if (triangle != null) {
 						// We've got a winner!
 						// triangle.setFill(playerColour[currentPlayer]);
 						fillTriangle(triangle);
 						getChildren().add(triangle);
+						showWinnerAlert();
 					} 
 					else if(playerLine.getEndX() != playerLine.getStartX() || playerLine.getEndY() != playerLine.getStartY()){
 						nextPlayer();
@@ -94,6 +101,7 @@ public class GameRoot extends BorderPane {
 	Line copyLine (Line ogLine) {
 		Line copyLine = new Line(ogLine.getStartX(), ogLine.getStartY(), ogLine.getEndX(), ogLine.getEndY());
 		copyLine.setStroke(ogLine.getStroke());
+		copyLine.setStrokeWidth(ogLine.getStrokeWidth());
 		return copyLine;
 	}
 	
@@ -110,6 +118,16 @@ public class GameRoot extends BorderPane {
 		RadialGradient triangleFill = new RadialGradient(0, 0.1, x, y, 100, false, CycleMethod.NO_CYCLE, new Stop(0, Color.BLACK), 
 				new Stop(1, playerColour[currentPlayer]));
 		triangle.setFill(triangleFill);
+	}
+	
+	void showWinnerAlert() {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Triangle Game");
+		alert.setHeaderText("Game Over");
+		alert.setContentText("Congratulations " + colourName[currentPlayer]);
+		alert.setGraphic(null);
+
+		alert.showAndWait();
 	}
 
 }
